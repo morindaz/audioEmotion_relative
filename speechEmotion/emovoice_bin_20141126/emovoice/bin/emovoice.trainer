@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<trainer ssi-v="4">
+    <classes size="2">
+        <item name="negative" id="0" />
+        <item name="positive" id="1" />
+    </classes>
+    <users size="1">
+        <item name="user" id="0" />
+    </users>
+    <streams size="1">
+        <item byte="4" dim="1" sr="16000.000000" type="FLOAT" />
+    </streams>
+    <transform>
+        <item stream="0" name="ssi_feature_EmoVoiceFeat" info="Emo Voice Feature Set" option="emovoice.00.ssi_feature_EmoVoiceFeat.option" frame="0.000000" delta="0.000000" />
+    </transform>
+    <model name="ssi_model_NaiveBayes" info="Naive bayes classifier." stream="0" path="emovoice.ssi_model_NaiveBayes.model" />
+</trainer>

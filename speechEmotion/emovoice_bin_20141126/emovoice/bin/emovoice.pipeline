@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<pipeline ssi-v="1">
+
+	<register>
+		<load name="ssiaudio.dll"/>
+		<load name="ssiioput.dll"/>		
+		<load name="ssigraphic.dll"/>
+		<load name="ssisignal.dll"/>
+		<load name="ssimodel.dll"/>
+		<load name="ssiemovoice.dll" />
+		<load name="ssiopensmile.dll" />
+	</register>	
+	
+	<framework console="true" cpos="0,300,800,300"/>
+	<painter arrange="true" apos="1,2,0,0,800,300"/>	
+	
+	<!--	Audio sensor
+	
+	When called for the first time user will be asked to select audio device 
+	from a list of available devices. During following calls the selection is loaded
+	from an auto-generated file 'audio.option'. To select a different device 
+	manually delete 'audio.option' or remove option="audio" (in the latter case
+	selection is not longer stored).
+	
+	-->
+	<sensor create="ssi_sensor_Audio" option="audio" scale="true">
+		<provider channel="audio" pin="audio"/>		
+	</sensor>
+		
+	<transformer create="ssi_feature_OSIntensity">
+		<input pin="audio" frame="0.01s"/>
+		<output pin="audio_intensity"/>
+	</transformer>
+	
+	<!--	Voice activity detection
+	
+	* thres   : threshold
+	* mindur  : minimum length of detected speech segments in seconds
+	* hangin  : #voiced frames before start of speech is detected
+	* hangout : #unvoiced frames before end of speech is detected
+	
+	-->
+	<consumer create="ssi_consumer_ThresEventSender" thres="0.001" thresid="thres" hangin="2" hangout="50" sname="voice" ename="vad" mindur="0.5" maxdur="5.0">
+		<input pin="audio_intensity" frame="5"/>
+	</consumer>
+	
+	<!--	Emotional speech recognizer
+	
+	* trainer : full or relative path to file with pre-trained model '<name>.trainer'
+	* console : set to false to omit output on console
+	* file    : remove to omit output to file
+	
+	NOTE: you can use gui ssimodelui.exe of ssi to train own models
+
+	-->
+	<consumer create="ssi_consumer_Classifier" trainer="emovoice" file="emovoice.log" console="true" sname="voice" ename="emotion">
+		<input pin="audio" listen="vad@voice"/>
+	</consumer>
+	
+	<!--    Socket Sender 
+	
+	* socket  : enables UDP socket connection
+	* host    : hostname
+	* port    : port number
+	* xml     : true, sends an xml string with class names and probabilities
+	            false, sends probabilities as raw 32-bit float values (one for each class)
+	
+	-->
+	<object create="ssi_listener_SocketEventWriter" host="localhost" port="1234" xml="true">
+		<listen address="emotion@voice"/>
+	</object>
+
+	<!--	Visualization
+	
+	To omit visualization of audio waveforms put following lines in comment.
+	
+	-->
+	<consumer create="ssi_consumer_SignalPainter" name="vad" type="2">
+		<input pin="audio" listen="vad@voice"/>
+	</consumer>
+	<consumer create="ssi_consumer_SignalPainter" name="audio" size="10.0" type="2">
+		<input pin="audio" frame="0.01s"/>
+	</consumer>
+	
+</pipeline>

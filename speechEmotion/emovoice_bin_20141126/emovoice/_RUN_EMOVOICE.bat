@@ -1,0 +1,1 @@
+bin\xmlpipe.exe bin\emovoice

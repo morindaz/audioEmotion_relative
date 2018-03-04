@@ -1,0 +1,60 @@
+------------------------------------------------------------
+	Social Signal Interpretation (SSI)
+------------------------------------------------------------
+
+(c) 2007-13 University of Augsburg
+	Lab for Human Centered Multimedia
+	support@openssi.net
+	http://openssi.net	
+	
+------------------------------------------------------------
+	EmoVoice (Emotional Speech Recognition)
+------------------------------------------------------------	
+	
+	EmoVoice is an emotional speech recognizer implemented in the SSI framework. It comes with a pipeline (emovoice.pipeline) and an example model (emovoice.trainer). The user is encouraged to train a personalized model using the training GUI (modelui.exe).
+	
+	_RUN_EMOVOICE.bat :	
+	
+		Starts the recognition pipeline and a console application that receives and displays recognition results.
+	
+	_RUN_EMOTRAIN.bat :
+	
+		Starts the graphical interface that let you create your own emotional speech database.
+	
+------------------------------------------------------------
+	Full Source Code
+------------------------------------------------------------	
+		
+	svn://svn.code.sf.net/p/open-ssi/code/trunk
+	
+------------------------------------------------------------
+	Publications
+------------------------------------------------------------		
+	
+	T. Vogt, E. André and N. Bee, "EmoVoice – A framework for online recognition of emotions from voice", in Proceedings of Workshop on Perception and Interactive Technologies for Speech-Based Systems, 2008.
+
+	@inproceedings{Vogt:2008,
+	 author = {Vogt, Thurid and Andr\'{e}, Elisabeth and Bee, Nikolaus},
+	 title = {EmoVoice -- A Framework for Online Recognition of Emotions from Voice},
+	 booktitle = {Proceedings of the 4th IEEE tutorial and research workshop on Perception and Interactive Technologies for Speech-Based Systems: Perception in Multimodal Dialogue Systems},
+	 series = {PIT '08},
+	 year = {2008},
+	 location = {Kloster Irsee, Germany},
+	 pages = {188--199},
+	 publisher = {Springer-Verlag},
+	 address = {Berlin, Heidelberg},
+	}
+	
+	J. Wagner, F. Lingenfelser and E. André, "The Social Signal Interpretation Framework (SSI) for Real Time Signal Processing and Recognition", in Proceedings of Interspeech, 2011.
+
+	@inproceedings {wagner11,
+	 author = {Wagner, Johannes and Lingenfelser, Florian and Andr{\'e}, Elisabeth},
+	 location={Florence, Italy},
+	 booktitle={Proc. of Interspeech 2011},
+	 title={The Social Signal Interpretation Framework (SSI) for Real Time Signal Processing and Recognition},
+	 year={2011}
+	}
+	
+------------------------------------------------------------
+	Bug report to support@openssi.net
+------------------------------------------------------------
