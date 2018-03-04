@@ -1,0 +1,3 @@
+train3All里面是包含了筛选过的数据，所有的，有重复项。包含了test以及train的重复项
+train2里面是删除了重复项的
+现在希望在train3withoutTest里面将test的数据删除 train3里面是没有经过筛选的音频文件
